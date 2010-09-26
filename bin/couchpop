@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+$:.unshift(File.dirname(__FILE__) + '/../lib') unless $:.include?(File.dirname(__FILE__) + '/../lib')
+
+require 'rubygems'
+require 'couchpop'
+
+this_dirname = File.basename(File.expand_path('.'))
+database_name = $ARGV[0] || this_dirname
+app_name = $ARGV[1] || this_dirname
+Couchpop.new(database_name, app_name).rock!
