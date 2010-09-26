@@ -5,6 +5,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "couchpop"
+    gem.version = File.read('VERSION')
     gem.summary = %Q{Push the contents of a directory to a CouchDB document}
     gem.description = %Q{Couchpop uploads a directory to CouchDB}
     gem.email = "paul@rslw.com"
