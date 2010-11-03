@@ -13,9 +13,7 @@ class Couchpop
     end
     
     def database
-      
       @database ||= begin
-        server.database!(database_name).delete!
         server.database!(database_name)
       end
     end
@@ -23,7 +21,12 @@ class Couchpop
     def rock!
 
       server.database!(app_name)
-      doc = CouchRest::Document.new({'_id' => app_name})
+      
+      doc = begin
+        database.get(app_name)
+      rescue RestClient::ResourceNotFound
+        CouchRest::Document.new({'_id' => app_name})
+      end
       doc.database = database
 
       database.save_doc(doc)
